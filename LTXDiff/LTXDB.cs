@@ -262,6 +262,13 @@ namespace LTXDiff
                     {
                         CurrentLine = Helpers.GetRegexMatch(CurrentLine, "^\\[[^\\[\\]\\s]+\\](?=[^:].*$)");
                     }
+
+                    //code demonized
+                    //trim ":". Typo found in some mods, i.e. Trader Overhaul
+                    if (Helpers.IsRegexMatching(CurrentLine, "^\\[[^\\[\\]\\s]+\\][:]+$")) {
+                        CurrentLine = CurrentLine.Trim(':');
+                    }
+                    //code demonized end
                 }
 
                 if (Helpers.IsRegexMatching(CurrentLine, "^\\[[^\\[\\]\\s]+\\](:[^\\[\\]:]+)?$"))                                 //i.e. is it in the form "[some_section]:some_parent"
