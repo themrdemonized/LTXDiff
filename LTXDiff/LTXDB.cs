@@ -294,6 +294,26 @@ namespace LTXDiff
                     continue;
                 }
 
+                var lineSplit = CurrentLine.Split(new[] { '=' }, 2);
+                if (lineSplit.Length == 2)                                    //i.e. is it in the form "some_variable = some_value", simple equals split
+                {
+                    if (String.IsNullOrEmpty(lineSplit[1].Trim()))            //i.e. is it in the form "some_variable =", simple equals split
+                    {
+                        string Key1 = lineSplit[0].Trim();                               //i.e. extract variable name
+
+                        yield return new LTXData(CurrentSectionName, CurrentSectionParent, Key1, "");
+
+                        continue;
+                    }
+
+                    string Key = lineSplit[0].Trim();                         //i.e. extract variable name
+                    string Value = lineSplit[1].Trim();                       //i.e. extract variable value
+
+                    yield return new LTXData(CurrentSectionName, CurrentSectionParent, Key, Value);
+
+                    continue;
+                }
+
                 //Key Value Pair
                 if (Helpers.IsRegexMatching(CurrentLine, "^[^\\[\\]\"]+(\\s+)?=(\\s+)?\"[^\"]*\"$"))                              //i.e. is it in the form "some_variable = "some_value""
                 {
