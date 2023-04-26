@@ -214,7 +214,7 @@ namespace LTXDiff
             {
                 string RelativeFileName = Helpers.GetRelativePath(BaseDir, ModDir, FileName);
 
-                if (Path.GetExtension(FileName) != ".ltx")
+                if (!Helpers.IsValidLTX(FileName))
                 {
                     if (bCopyNonLTX)
                     {

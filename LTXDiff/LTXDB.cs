@@ -159,7 +159,7 @@ namespace LTXDiff
 
             string FileDir = Helpers.GetRelativePath(BaseDir, ModDir, Path.GetDirectoryName(Filename));
 
-            if (Path.GetExtension(Filename) != ".ltx" || !File.Exists(Filename))
+            if (!Helpers.IsValidLTX(Filename, true))
             {
                 yield break;
             }

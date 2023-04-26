@@ -152,5 +152,11 @@ namespace LTXDiff
 
             return true;
         }
+        public static bool IsValidLTX(string Filename, bool CheckFileExists = false)
+        {
+            bool res = Path.GetExtension(Filename) == ".ltx" && !Helpers.IsRegexMatching(Path.GetFileName(Filename), "^mod_") && (!CheckFileExists || File.Exists(Filename));
+            //PrintC("Checking " + Filename + " - " + (res ? "valid" : "invalid"));
+            return res;
+        }
     }
 }
